@@ -6,7 +6,7 @@ import { MyApp } from './app.component';
 import { my_bonusPage } from '../pages/my_bonus/my_bonus';
 import { NotificationPage } from '../pages/notification/notification';
 import { SettingPage } from '../pages/setting/setting';
-import { HomePage } from '../pages/home/home';
+import { couponPage } from '../pages/coupon/coupon';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -19,7 +19,7 @@ import { HttpModule } from '@angular/http';
     MyApp,
     my_bonusPage,
     SettingPage,
-    HomePage,
+    couponPage,
     NotificationPage,
     TabsPage
   ],
@@ -33,7 +33,7 @@ import { HttpModule } from '@angular/http';
     MyApp,
     my_bonusPage,
     SettingPage,
-    HomePage,
+    couponPage,
     NotificationPage,
     TabsPage
   ],

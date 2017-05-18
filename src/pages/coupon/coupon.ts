@@ -3,10 +3,10 @@ import { NavController } from 'ionic-angular';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-coupon',
+  templateUrl: 'coupon.html'
 })
-export class HomePage {
+export class couponPage {
 
   messageList = [];
 
