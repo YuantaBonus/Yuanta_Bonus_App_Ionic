@@ -1,17 +1,16 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      Contact
+      設定
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngFor="let result of resultList">
     <ion-list-header>Follow us on Twitter</ion-list-header>
     <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
+      {{result.args.date}} {{result.args.account}} {{result.args.fee.c[0]}}
     </ion-item>
   </ion-list>
 </ion-content>

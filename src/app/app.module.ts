@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { my_bonusPage } from '../pages/my_bonus/my_bonus';
+import { NotificationPage } from '../pages/notification/notification';
+import { SettingPage } from '../pages/setting/setting';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -16,9 +17,10 @@ import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    my_bonusPage,
+    SettingPage,
     HomePage,
+    NotificationPage,
     TabsPage
   ],
   imports: [
@@ -29,9 +31,10 @@ import { HttpModule } from '@angular/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    my_bonusPage,
+    SettingPage,
     HomePage,
+    NotificationPage,
     TabsPage
   ],
   providers: [
