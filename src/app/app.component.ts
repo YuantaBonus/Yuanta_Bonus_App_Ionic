@@ -14,16 +14,11 @@ declare var Web3;
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = IntroPage;
+  rootPage:any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public storage: Storage) {
 
-
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-
-      this.storage.get('introShown').then((result) => {
+    this.storage.get('introShown').then((result) => {
 
         if(result){
           this.rootPage = TabsPage;
@@ -33,6 +28,10 @@ export class MyApp {
         }
 
       });
+
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
 
       statusBar.styleDefault();
       splashScreen.hide();
