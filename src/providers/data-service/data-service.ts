@@ -14,7 +14,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class DataServiceProvider {
 
-  private url: string = 'http://140.113.65.49/android/bank_data.php';
+  private url: string = 'http://140.113.65.49/android/client_data.php';
 
   constructor(private http: Http) {
     console.log('Hello DataServiceProvider Provider');

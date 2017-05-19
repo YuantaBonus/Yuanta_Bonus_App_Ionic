@@ -6,7 +6,7 @@ import { DataServiceProvider } from '../../providers/data-service/data-service';
   selector: 'page-coupon',
   templateUrl: 'coupon.html'
 })
-export class couponPage {
+export class CouponPage {
 
   messageList = [];
 

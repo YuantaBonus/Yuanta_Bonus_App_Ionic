@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { my_bonusPage } from '../my_bonus/my_bonus';
+import { My_bonusPage } from '../my_bonus/my_bonus';
 import { SettingPage } from '../setting/setting';
-import { couponPage } from '../coupon/coupon';
+import { CouponPage } from '../coupon/coupon';
 import { NotificationPage } from '../notification/notification';
 
 @Component({
@@ -10,8 +10,8 @@ import { NotificationPage } from '../notification/notification';
 })
 export class TabsPage {
 
-  tab1Root = couponPage;
-  tab2Root = my_bonusPage;
+  tab1Root = CouponPage;
+  tab2Root = My_bonusPage;
   tab3Root = NotificationPage;
   tab4Root = SettingPage;
 

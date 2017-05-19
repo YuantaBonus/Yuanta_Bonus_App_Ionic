@@ -6,7 +6,7 @@ import { DataServiceProvider } from '../../providers/data-service/data-service';
   selector: 'page-my_bonus',
   templateUrl: 'my_bonus.html'
 })
-export class my_bonusPage {
+export class My_bonusPage {
 
   messageList = [];
 

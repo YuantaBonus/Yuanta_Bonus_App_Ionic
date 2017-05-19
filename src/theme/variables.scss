@@ -4,7 +4,6 @@ $font-path: "../assets/fonts";
 
 @import "ionic.globals";
 
-
 // Shared Variables
 // --------------------------------------------------
 // To customize the look and feel of this app, you can override
@@ -69,7 +68,8 @@ $colors: (
 // http://ionicframework.com/docs/v2/ionicons/
 
 @import "ionic.ionicons";
-
+@import "icomoon";
+@include makeIcon(icon-library, '\e921');
 
 // Fonts
 // --------------------------------------------------

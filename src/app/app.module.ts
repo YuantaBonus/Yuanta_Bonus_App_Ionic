@@ -1,12 +1,14 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
-import { my_bonusPage } from '../pages/my_bonus/my_bonus';
+import { IntroPage } from '../pages/intro/intro';
+import { My_bonusPage } from '../pages/my_bonus/my_bonus';
 import { NotificationPage } from '../pages/notification/notification';
 import { SettingPage } from '../pages/setting/setting';
-import { couponPage } from '../pages/coupon/coupon';
+import { CouponPage } from '../pages/coupon/coupon';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -17,23 +19,26 @@ import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
-    my_bonusPage,
+    IntroPage,
+    My_bonusPage,
     SettingPage,
-    couponPage,
+    CouponPage,
     NotificationPage,
     TabsPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpModule
+    HttpModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    my_bonusPage,
+    IntroPage,
+    My_bonusPage,
     SettingPage,
-    couponPage,
+    CouponPage,
     NotificationPage,
     TabsPage
   ],
