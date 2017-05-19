@@ -3,7 +3,7 @@
     <name>元大紅利</name>
     <description>紅利點數交換平台</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">NCTU Team</author>
-    <content original-src="index.html" src="http://192.168.56.1:8101" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-navigation href="http://192.168.56.1:8100" />
@@ -22,7 +22,6 @@
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
-    <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <platform name="android">
