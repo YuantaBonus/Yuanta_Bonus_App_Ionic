@@ -1,13 +1,82 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>紅利好康</ion-title>
+    <ion-title>
+      <ion-icon name="pricetags"></ion-icon>
+      紅利好康
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list *ngFor="let message of messageList">
+  <!--1-->
+  <ion-card>
+
     <ion-item>
-      {{message.id}} {{message.account}} {{message.name}} {{message.user_id}} {{message.value}}
+      <ion-avatar item-left>
+        <img src="img/pchome.jpg">
+      </ion-avatar>
+      <h2>PChome線上購物</h2>
+      <p>5月20, 2017</p>
     </ion-item>
-  </ion-list>
+
+    <img src="img/pchome_shoe.jpg">
+
+    <ion-card-content>
+      <p>1968 年就已經誕生的 PUMA Suede，是很多鞋款的起源，簡潔的造型還有麂皮的鞋身都讓它的魅力歷久不衰，2014 年的最新系列系列採用了黑、紅還有綠三種配色爲，以經典配色透過金色的點綴來承襲 Suede 一貫的魅力。</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+          <ion-icon name="pricetag"></ion-icon>
+          <h2>最高折抵50%</h2>
+      </ion-col>
+      <ion-col text-right>
+        <ion-note>
+          11h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+  <!--2-->
+  <!--https://tw.buy.yahoo.com/activity/activity950?p=all2-00-170503-springpinkcollection-->
+  <ion-card>
+
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="img/yahoo.jpg">
+      </ion-avatar>
+      <h2>Yahoo奇摩購物中心</h2>
+      <p>5月18, 2017</p>
+    </ion-item>
+
+    <img src="img/yahoo_shoe.jpg">
+
+    <ion-card-content>
+      <p>女孩們一定都有一雙小白鞋，
+但～今年春天必入手的小粉鞋，
+你擁有了嗎?!
+
+近來各大品牌陸續發售了各式粉紅配色的鞋款，
+女孩們紛紛展現出不輸人的氣勢，
+款款短時間內完售，
+讓小編超驚訝!!
+
+快來看看小編的推薦吧～</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+          <ion-icon name="pricetag"></ion-icon>
+          <h2>最高折抵40%</h2>
+      </ion-col>
+      <ion-col text-right>
+        <ion-note>
+          2 days ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
 </ion-content>

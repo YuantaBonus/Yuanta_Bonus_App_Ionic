@@ -8,4 +8,22 @@ page-coupon {
     height: 100%;
     text-align: center;
   }
+
+
+  .card-md ion-col {
+
+    ion-icon{
+      color: palevioletred;
+    }
+
+    h2 {
+      color: palevioletred;
+      display: inline;
+    }
+  }
+
+  .card-md{
+    margin-bottom: 30px;
+  }
+
 }
