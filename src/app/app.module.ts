@@ -5,6 +5,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
 import { IntroPage } from '../pages/intro/intro';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 import { My_bonusPage } from '../pages/my_bonus/my_bonus';
 import { NotificationPage } from '../pages/notification/notification';
 import { SettingPage } from '../pages/setting/setting';
@@ -20,6 +22,8 @@ import { HttpModule } from '@angular/http';
   declarations: [
     MyApp,
     IntroPage,
+    LoginPage,
+    RegisterPage,
     My_bonusPage,
     SettingPage,
     CouponPage,
@@ -36,6 +40,8 @@ import { HttpModule } from '@angular/http';
   entryComponents: [
     MyApp,
     IntroPage,
+    LoginPage,
+    RegisterPage,
     My_bonusPage,
     SettingPage,
     CouponPage,

@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { IntroPage } from '../pages/intro/intro';
+import { LoginPage } from '../pages/login/login';
 
 declare var Web3;
 
@@ -18,23 +19,29 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public storage: Storage) {
 
-    this.storage.get('introShown').then((result) => {
-
-        if(result){
-          this.rootPage = TabsPage;
-        } else {
-          this.rootPage = IntroPage;
-          this.storage.set('introShown', true);
-        }
-
-      });
-
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
+        this.storage.get('introShown').then((intro_result) => {
+
+        if(intro_result){
+          this.storage.get('login').then((login_result) => {
+            if(login_result)
+              this.rootPage = TabsPage;
+            else
+              this.rootPage = LoginPage;
+          });
+          splashScreen.hide();
+        } else {
+          this.rootPage = IntroPage;
+          this.storage.set('introShown', true);
+          splashScreen.hide();
+        }
+
+      });
+
       statusBar.styleDefault();
-      splashScreen.hide();
 
     });
   }
