@@ -2,7 +2,7 @@
   <ion-navbar color="primary">
     <ion-buttons left>
       <button ion-button icon-only>
-        <ion-icon class="menu" name="menu"></ion-icon>
+        <ion-icon class="icon_navbar_left" name="menu"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
@@ -11,13 +11,23 @@
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only>
-        <ion-icon class="star" name="star"></ion-icon>
+        <ion-icon class="icon_navbar_right" name="star"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <!--1-->
   <ion-card>
 
