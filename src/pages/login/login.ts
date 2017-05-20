@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { TabsPage } from '../tabs/tabs';
+import { RegisterPage } from '../register/register';
 
 @IonicPage()
 @Component({
@@ -15,5 +16,9 @@ export class LoginPage {
 
   login_success(){
     this.navCtrl.push(TabsPage);
+  }
+
+  goTo_register(){
+    this.navCtrl.push(RegisterPage);
   }
 }

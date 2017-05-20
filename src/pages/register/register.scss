@@ -1,3 +1,23 @@
 page-register {
+  ion-content{
+    background: url('../img/login_background.png');
+    background-size: cover;
+  }
 
+  .input_group{
+    text-align: center;
+    margin-top: 30%;
+    opacity: 0.8;
+  }
+
+  .register_icon{
+    width: 70px;
+    height: 70px;
+    margin-bottom: 5%;
+    background: transparent;
+  }
+
+  .register_button{
+    margin: 5% 0 5% 0;
+  }
 }
