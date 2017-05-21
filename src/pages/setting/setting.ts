@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { ToastController } from 'ionic-angular';
-
 declare var Web3: any;
 var myContractInstance;
+var event_result;
+var event_check = false;
 
 @Component({
   selector: 'page-setting',
@@ -13,14 +13,15 @@ var myContractInstance;
 export class SettingPage {
 
   resultList = [];
+  text = "Start";
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
-
-    this.requireWeb3();
-    this.web3_event();
+  constructor(public navCtrl: NavController) {
+      this.requireWeb3();
+      this.web3_event();
+      this.event_update();
   }
 
-  requireWeb3(){
+   requireWeb3(){    // 建立contract
 
     var web3 = new Web3();
 	  web3.setProvider(new web3.providers.HttpProvider("http://140.113.72.54:8545"));	//連到哪台server
@@ -33,7 +34,7 @@ export class SettingPage {
     myContractInstance = MyContract.at(myContractAddress);	// initiate contract for an address
   }
 
-  web3_event(){
+  web3_event(){   //建立 event filter
 
     var event = myContractInstance.Exchange({},
 				{
@@ -41,23 +42,41 @@ export class SettingPage {
 					toBlock: 'latest'
 				});
 
-			event.get(function(error, result){
+      this.event_get(event);
+
+  }
+
+  event_get(event){   // get event 並丟到 global 的 event_result ; 再把 event_check 改為 true
+
+    event.get(function(error, result){
 			  	if (!error){
-				    console.log(result);
+            event_result = result;
+            event_check = true;
 				    for (var i = result.length-1; i >=0; i--) {
 				    	console.log(result[i].transactionHash);
-              console.log(result[i].args.account);
-              console.log(result[i].args.date);
-              console.log(result[i].args.fee.c[0]);
-              console.log(result[i].args.from);
-              console.log(result[i].args.from_bonus.c[0]);
-              console.log(result[i].args.to);
-              console.log(result[i].args.to_bonus.c[0]);
-              console.log(result[i].args.value.c[0]);
+              // console.log(result[i].args.account);
+              // console.log(result[i].args.date);
+              // console.log(result[i].args.fee.c[0]);
+              // console.log(result[i].args.from);
+              // console.log(result[i].args.from_bonus.c[0]);
+              // console.log(result[i].args.to);
+              // console.log(result[i].args.to_bonus.c[0]);
+              // console.log(result[i].args.value.c[0]);
 				    }
 				  }
       });
+
   }
 
+  event_update(){     //每隔 0.1 秒 檢查 event_check ; 若為true 把 global 的 event_result 放進 result_list 給 html 讀取
 
+      setTimeout(()=>{
+        if(event_check == false){
+          this.event_update();
+        }else{
+          this.resultList = event_result;
+          this.text = "Event Get!";
+        }
+      }, 100);
+  }
 }
