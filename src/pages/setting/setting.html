@@ -14,4 +14,60 @@
       {{result.args.date}} {{result.args.account}} {{result.args.fee.c[0]}}
     </ion-item>
   </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Characters
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select>
+        <ion-option value="f">Female</ion-option>
+        <ion-option value="m">Male</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Frodo Baggins</ion-label>
+      <ion-toggle value="foo" checked="true"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sam</ion-label>
+      <ion-toggle color="energized"></ion-toggle>
+    </ion-item>
+
+    <ion-item>
+      <ion-range>
+        <ion-icon range-left small name="sunny"></ion-icon>
+        <ion-icon range-right name="sunny"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list radio-group>
+
+    <ion-list-header>
+      Auto Manufacturers
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Cord</ion-label>
+      <ion-radio value="cord"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Duesenberg</ion-label>
+      <ion-radio value="duesenberg"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hudson</ion-label>
+      <ion-radio value="hudson"></ion-radio>
+    </ion-item>
+
+  </ion-list>
+
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { ToastController } from 'ionic-angular';
+
 declare var Web3: any;
 var myContractInstance;
 
@@ -12,11 +14,10 @@ export class SettingPage {
 
   resultList = [];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
 
     this.requireWeb3();
     this.web3_event();
-
   }
 
   requireWeb3(){
@@ -57,5 +58,6 @@ export class SettingPage {
 				  }
       });
   }
+
 
 }
