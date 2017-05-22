@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 
 /*
   Generated class for the DataServiceProvider provider.
@@ -14,14 +14,22 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class DataServiceProvider {
 
-  private url: string = 'http://140.113.65.49/android/client_data.php';
+  private account_data_url: string = 'http://140.113.65.49/android/account_data.php';
+  private profile_url: string = 'http://140.113.65.49/android/profile_data.php';
 
   constructor(private http: Http) {
     console.log('Hello DataServiceProvider Provider');
   }
 
-  getMessages(){
-    return this.http.get(this.url)
+  get_account_data(){
+    return this.http.get(this.account_data_url)
+      .map(this.extractData)
+      .do(this.logResponse)
+      .catch(this.catchError)
+  }
+
+  get_profile(){
+    return this.http.get(this.profile_url)
       .map(this.extractData)
       .do(this.logResponse)
       .catch(this.catchError)

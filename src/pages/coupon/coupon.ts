@@ -8,14 +8,14 @@ import { DataServiceProvider } from '../../providers/data-service/data-service';
 })
 export class CouponPage {
 
-  messageList = [];
+  account_data_list = [];
 
   constructor(public navCtrl: NavController, private DataServiceProvider: DataServiceProvider) {
-      this.getMessages();
+      this.get_account_data();
   }
 
-  getMessages(){
-    this.DataServiceProvider.getMessages().subscribe(data => this.messageList = data);
+  get_account_data(){
+    this.DataServiceProvider.get_account_data().subscribe(data => this.account_data_list = data);
   }
 
   doRefresh(refresher) {
