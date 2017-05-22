@@ -8,6 +8,7 @@ import { IntroPage } from '../pages/intro/intro';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { My_bonusPage } from '../pages/my_bonus/my_bonus';
+import { My_bonus_banksPage } from '../pages/my_bonus_banks/my_bonus_banks';
 import { NotificationPage } from '../pages/notification/notification';
 import { SettingPage } from '../pages/setting/setting';
 import { CouponPage } from '../pages/coupon/coupon';
@@ -25,6 +26,7 @@ import { HttpModule } from '@angular/http';
     LoginPage,
     RegisterPage,
     My_bonusPage,
+    My_bonus_banksPage,
     SettingPage,
     CouponPage,
     NotificationPage,
@@ -43,6 +45,7 @@ import { HttpModule } from '@angular/http';
     LoginPage,
     RegisterPage,
     My_bonusPage,
+    My_bonus_banksPage,
     SettingPage,
     CouponPage,
     NotificationPage,

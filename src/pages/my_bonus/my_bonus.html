@@ -8,12 +8,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let message of messageList">
-      <ion-icon name="icon-library" item-left></ion-icon>
-      <h2>{{message.bank}}</h2>
-      <h3>{{message.account}}</h3>
-      <h2 item-right>{{message.value}}</h2>
+
+  <ion-card>
+
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="img/profile.jpg">
+      </ion-avatar>
+      <h2>林書豪</h2>
+      <p>November 5, 1955</p>
     </ion-item>
-  </ion-list>
+
+    <ion-card-content>
+
+      <ion-list>
+        <ion-list-header>我的銀行帳戶</ion-list-header>
+        <!--<button ion-button secondary (click)="openNavDetailsPage()">Navigate</button>-->
+        <button ion-item *ngFor="let message of messageList" (click)="openNavDetailsPage()" icon-left>
+          <ion-icon name="icon-library" item-left></ion-icon>
+          {{ items.title }}
+        </button>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
