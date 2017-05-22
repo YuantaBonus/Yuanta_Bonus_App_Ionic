@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { DataServiceProvider } from '../../providers/data-service/data-service';
 
 
 @Component ({
@@ -13,8 +12,8 @@ export class My_bonus_banksPage {
 
   constructor(public navCtrl: NavController, public NavParams: NavParams){
 
-    console.log(NavParams.get('val'));
     this.items = NavParams.data.item;
+    console.log(this.items);
   }
 
   ionViewDidLoad() {

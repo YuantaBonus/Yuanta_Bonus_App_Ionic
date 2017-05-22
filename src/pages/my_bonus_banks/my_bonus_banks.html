@@ -1,17 +1,18 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ items[0].title }}
+      {{ items.bank }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list *ngFor="let items of items">
-    <p>{{ items.number }}</p>
-    <p>{{ items.name }}</p>
-    <p>{{ items.left }}</p>
-    <p>{{ items.date }}</p>
+    <!--傳過來的不是 陣列 只是一個object 不能用 ngfor-->
+    <p>{{ items.bank }}</p>
+    <p>{{ items.bank }}</p>
+    <p>{{ items.bank }}</p>
+    <p>{{ items.bank }}</p>
   </ion-list>
 </ion-content>
 
