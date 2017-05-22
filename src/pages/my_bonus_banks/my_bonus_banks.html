@@ -7,12 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list *ngFor="let items of items">
+  <ion-list>
     <!--傳過來的不是 陣列 只是一個object 不能用 ngfor-->
-    <p>{{ items.bank }}</p>
-    <p>{{ items.bank }}</p>
-    <p>{{ items.bank }}</p>
-    <p>{{ items.bank }}</p>
+    <p>{{ items.account }}</p>
+    <p>{{ items.name }}</p>
+    <p>{{ items.regist_time }}</p>
+    <p>{{ items.user_id }}</p>
+    <p>{{ items.value }}</p>
   </ion-list>
 </ion-content>
 
