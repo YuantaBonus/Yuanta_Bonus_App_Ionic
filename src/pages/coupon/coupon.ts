@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { DataServiceProvider } from '../../providers/data-service/data-service';
+
 
 @Component({
   selector: 'page-coupon',
@@ -8,14 +8,8 @@ import { DataServiceProvider } from '../../providers/data-service/data-service';
 })
 export class CouponPage {
 
-  account_data_list = [];
+  constructor(public navCtrl: NavController) {
 
-  constructor(public navCtrl: NavController, private DataServiceProvider: DataServiceProvider) {
-      this.get_account_data();
-  }
-
-  get_account_data(){
-    this.DataServiceProvider.get_account_data().subscribe(data => this.account_data_list = data);
   }
 
   doRefresh(refresher) {
