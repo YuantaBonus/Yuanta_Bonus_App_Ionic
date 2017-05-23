@@ -7,6 +7,8 @@
 </ion-header>
 
 <ion-content padding>
+
+  <p>我的資料</p>
   <ion-list>
     <!--傳過來的不是 陣列 只是一個object 不能用 ngfor-->
     <p>{{ items.account }}</p>
@@ -15,5 +17,17 @@
     <p>{{ items.user_id }}</p>
     <p>{{ items.value }}</p>
   </ion-list>
+
+  <ion-list>
+  <p>交換點數</p>
+    <ion-item>
+      <ion-label>欲換取銀行</ion-label>
+      <ion-select #select (ionChange)="onChange(select.value)">
+        <ion-option value="cathy">國泰銀行</ion-option>
+        <ion-option value="citi">花旗銀行</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
 
