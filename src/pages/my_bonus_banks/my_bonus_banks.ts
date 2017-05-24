@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 
 @Component ({
   selector: 'page-my_bonus_banks',
@@ -13,7 +14,8 @@ export class My_bonus_banksPage {
 
   constructor(public navCtrl: NavController,
               public NavParams: NavParams,
-              public ActionSheetCtrl: ActionSheetController){
+              public ActionSheetCtrl: ActionSheetController,
+              private alertCtrl: AlertController){
 
     this.items = NavParams.data.item;
     console.log(this.items);
@@ -49,5 +51,28 @@ export class My_bonus_banksPage {
   onChange(select_banks){
     console.log("Selected bank", select_banks);
   }
+
+  presentConfirm() {
+  let alert = this.alertCtrl.create({
+    title: '交易確認',
+    message: '此項紅利交換是否確認送出?',
+    buttons: [
+      {
+        text: '是',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: '否',
+        handler: () => {
+          console.log('Submit clicked');
+        }
+      }
+    ]
+  });
+  alert.present();
+}
 
 }
