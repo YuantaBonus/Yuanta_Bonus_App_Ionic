@@ -1,41 +1,48 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      {{ items.bank }}
+      {{ nav_data.bank }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-card>
+    <p>我的資料</p>
+    <ion-list>
+      <!--傳過來的不是 陣列 只是一個object 不能用 ngfor-->
+      <p>{{ nav_data.account }}</p>
+      <p>{{ nav_data.name }}</p>
+      <p>{{ nav_data.regist_time }}</p>
+      <p>{{ nav_data.user_id }}</p>
+      <p>{{ nav_data.value }}</p>
+    </ion-list>
+  </ion-card>
 
-  <p>我的資料</p>
-  <ion-list>
-    <!--傳過來的不是 陣列 只是一個object 不能用 ngfor-->
-    <p>{{ items.account }}</p>
-    <p>{{ items.name }}</p>
-    <p>{{ items.regist_time }}</p>
-    <p>{{ items.user_id }}</p>
-    <p>{{ items.value }}</p>
-  </ion-list>
+  <ion-card>
+    <ion-list>
+    <p>交換點數</p>
+      <ion-item>
+        <ion-label color="primary">欲換取銀行</ion-label>
+        <ion-select #select (ionChange)="option_onChange(select.value)">
+          <ion-option value="cathy">國泰銀行</ion-option>
+          <ion-option value="citi">花旗銀行</ion-option>
+        </ion-select>
+      </ion-item>
 
-  <ion-list>
-  <p>交換點數</p>
-    <ion-item>
-      <ion-label color="primary">欲換取銀行</ion-label>
-      <ion-select #select (ionChange)="onChange(select.value)">
-        <ion-option value="cathy">國泰銀行</ion-option>
-        <ion-option value="citi">花旗銀行</ion-option>
-      </ion-select>
-    </ion-item>
+      <ion-item>
+        <ion-label color="primary">交換數量</ion-label>
+        <ion-input type="number" placeholder="數量" ngModel="from_bank_value" ngChange="input_onChange()" ></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label color="primary">交換數量</ion-label>
-      <ion-input type="tel" placeholder="Tel Input"></ion-input>
-    </ion-item>
+      <ion-item *ngIf="to_bank_value">
+        <h1>{{ to_bank_value }}</h1>
+      </ion-item>
 
-    <button ion-button round (click)='presentConfirm();'>交易送出</button>
+      <button ion-button round (click)='presentConfirm();'>交易送出</button>
+    </ion-list>
+  </ion-card>
 
-  </ion-list>
 
 </ion-content>
 
