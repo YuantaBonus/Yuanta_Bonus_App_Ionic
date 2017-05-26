@@ -29,7 +29,7 @@
         <!--<button ion-button secondary (click)="openNavDetailsPage()">Navigate</button>-->
         <button ion-item *ngFor="let message of account_data_list" (click)="openNavDetailsPage(message)" icon-left>
           <ion-icon name="icon-library" item-left></ion-icon>
-          {{ message.bank }}
+          {{ message.bank }}{{ message.account }}
         </button>
       </ion-list>
 

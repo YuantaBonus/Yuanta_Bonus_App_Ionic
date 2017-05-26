@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { DataServiceProvider } from '../../providers/data-service/data-service';
 
 declare var Web3: any;
 var web3;
@@ -21,7 +22,8 @@ export class My_bonus_banksPage {
   constructor(public navCtrl: NavController,
               public NavParams: NavParams,
               public ActionSheetCtrl: ActionSheetController,
-              private alertCtrl: AlertController){
+              private alertCtrl: AlertController,
+              private DataServiceProvider: DataServiceProvider) {
 
     this.requireWeb3();
 
@@ -29,17 +31,13 @@ export class My_bonus_banksPage {
     console.log(this.nav_data);
   }
 
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad My_bonus_banksPage');
-  }
-
   option_onChange(option){ // 選項變化時做的事情
     this.select_to_banks = option; //傳來 選的選項 = option ; 存進 ts 裡宣告的變數 this.select_to_banks
     console.log("Selected bank", option);
   }
 
-  input_onChange(){
-    this.to_bank_value = this.from_bank_value*100;
+  input_onChange(from_bank_value){
+    this.to_bank_value = this.from_bank_value*10;
     console.log(this.to_bank_value);
   }
 
@@ -95,9 +93,9 @@ export class My_bonus_banksPage {
     var from_bank_user_account = this.nav_data.account;
 
     var to_bank = this.select_to_banks;
-    var to_bank_value = 0   // 缺試算功能
+    var to_bank_value = this.to_bank_value   // 缺試算功能
 
-    var fee = 0; //
+    var fee = 0; // 缺試算功能
 
     var date = this.current_date();
 
@@ -151,6 +149,18 @@ export class My_bonus_banksPage {
 		// 			}
 		// 		}
 		// 	);
+
+    var update_data = {
+      "from_bank_value": from_bank_value,
+      "to_bank_value": to_bank_value,
+      "fee": fee
+    };
+
+    this.update_value(update_data);
+  }
+
+  update_value(data) {
+    this.DataServiceProvider.update_value(data);
   }
 
   current_date(){

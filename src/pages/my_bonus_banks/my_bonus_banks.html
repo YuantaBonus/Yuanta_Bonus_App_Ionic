@@ -24,19 +24,20 @@
     <p>交換點數</p>
       <ion-item>
         <ion-label color="primary">欲換取銀行</ion-label>
-        <ion-select #select (ionChange)="option_onChange(select.value)">
+        <ion-select #select (ionChange)="option_onChange(select.value)" placeholder="請選擇">
           <ion-option value="cathy">國泰銀行</ion-option>
           <ion-option value="citi">花旗銀行</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label color="primary">交換數量</ion-label>
-        <ion-input type="number" placeholder="數量" ngModel="from_bank_value" ngChange="input_onChange()" ></ion-input>
+        <ion-label color="primary">換出數量:</ion-label>
+        <ion-input type="number" placeholder="請輸入數量" (change)=input_onChange(from_bank_value) [(ngModel)]="from_bank_value"></ion-input>
       </ion-item>
 
-      <ion-item *ngIf="to_bank_value">
-        <h1>{{ to_bank_value }}</h1>
+      <ion-item>
+        <ion-label color="primary">可獲得數量:</ion-label>
+        <ion-input color="dark" disabled="true" placeholder="尚未輸入數量" value="{{ to_bank_value }}"></ion-input>
       </ion-item>
 
       <button ion-button round (click)='presentConfirm();'>交易送出</button>

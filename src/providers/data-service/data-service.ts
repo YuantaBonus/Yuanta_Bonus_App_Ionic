@@ -16,7 +16,8 @@ export class DataServiceProvider {
 
   private account_data_url: string = 'http://140.113.65.49/android/account_data.php';
   private profile_url: string = 'http://140.113.65.49/android/profile_data.php';
-  private update_value_url: string = 'http://140.113.65.49/android/profile_data.php';
+  private update_value_url: string = 'http://140.113.65.49/android/update_client_data.php';
+  private test_url: string = 'http://140.113.65.49/android/test.php';
 
   constructor(private http: Http) {
     //console.log('Hello DataServiceProvider Provider');
@@ -36,11 +37,14 @@ export class DataServiceProvider {
       .catch(this.catchError)
   }
 
-  update_value(data){
-    return this.http.post(this.update_value_url,data)
-      .map(this.extractData)
-      .do(this.logResponse)
-      .catch(this.catchError)
+  update_value(data) {
+
+    this.http.post(this.update_value_url, data)
+    .subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log("Oooops!");
+    });
   }
 
   private catchError(error: Response | any){
