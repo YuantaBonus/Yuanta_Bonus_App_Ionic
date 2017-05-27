@@ -17,8 +17,7 @@
       </ion-avatar>
 
       <p>{{ profile_list.username }}</p>
-      <p>{{ profile_list.id }}</p>
-      <!--超詭異der-->
+      <p>{{ profile_list.name }}</p>
 
     </ion-item>
 
@@ -31,6 +30,13 @@
           <ion-icon name="icon-library" item-left></ion-icon>
           {{ message.bank }}{{ message.account }}
         </button>
+      </ion-list>
+
+      <ion-list-header>最近交換紀錄</ion-list-header>
+      <ion-list *ngFor="let list of event_resultList">
+        <ion-item>
+          {{ list.args.from }}{{list.args.from_bonus.c[0] }} {{ list.args.to }}{{list.args.to_bonus.c[0] }}
+        </ion-item>
       </ion-list>
 
     </ion-card-content>

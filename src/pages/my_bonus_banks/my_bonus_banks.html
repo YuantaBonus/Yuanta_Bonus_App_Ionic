@@ -21,7 +21,9 @@
 
   <ion-card>
     <ion-list>
-    <p>交換點數</p>
+      <ion-list-header>
+        交換點數
+      </ion-list-header>
       <ion-item>
         <ion-label color="primary">欲換取銀行</ion-label>
         <ion-select #select (ionChange)="option_onChange(select.value)" placeholder="請選擇">
@@ -42,6 +44,20 @@
 
       <button ion-button round (click)='presentConfirm();'>交易送出</button>
     </ion-list>
+  </ion-card>
+
+  <ion-card>
+
+      <ion-list-header>
+        交換紀錄
+      </ion-list-header>
+
+      <ion-list *ngFor="let list of event_resultList">
+        <ion-item>
+          {{ list.args.from }}{{list.args.from_bonus.c[0] }} {{ list.args.to }}{{list.args.to_bonus.c[0] }}
+        </ion-item>
+      </ion-list>
+
   </ion-card>
 
 
