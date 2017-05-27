@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the NotificationPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 @IonicPage()
 @Component({
   selector: 'page-notification',
@@ -17,7 +11,7 @@ export class NotificationPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  doRefresh(refresher) {
+  doRefresh(refresher) {  //下拉重新整理
     console.log('Begin async operation', refresher);
 
     setTimeout(() => {

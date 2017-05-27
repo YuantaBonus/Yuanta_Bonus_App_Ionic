@@ -3,6 +3,7 @@ import { NavController, LoadingController  } from 'ionic-angular';
 import { My_bonus_banksPage } from '../my_bonus_banks/my_bonus_banks';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 
+// 全域的變數 js 才讀的到
 declare var Web3: any;
 var web3;
 var myContractInstance;
@@ -18,16 +19,17 @@ var event_check = false;
 
 export class My_bonusPage {
 
-  loading;
+  loading;  // loading動畫 的 變數
 
   items = [];
-  account_data_list = []; //宣告
-  profile_list= {
+  account_data_list = [];
+
+  profile_list= { // 單純為了讓 html不會顯示錯誤 先宣告裡面有甚麼key
     name: "",
     username: ""
   };
 
-  event_resultList = [];
+  event_resultList = []; //js 讀不到 => 從 全域的 event_result 獲得資料 顯示在 html
 
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, private DataServiceProvider: DataServiceProvider) {
 
@@ -37,7 +39,7 @@ export class My_bonusPage {
     this.get_profile(); //在 constructer　裡　call 這個function 要資料><
 
     this.requireWeb3();
-    this.client_eventWatch();
+    this.client_eventGet();
     this.event_update();
   }
 
@@ -49,18 +51,18 @@ export class My_bonusPage {
     this.loading.present();
   }
 
-  openNavDetailsPage(item) {
+  openNavDetailsPage(item) {  // 跳到選擇的銀行頁面 with 該銀行的data
     this.navCtrl.push(My_bonus_banksPage, { item: item });
   }
 
 
-  get_account_data(){
+  get_account_data(){ // 跟 dataservice 要 用戶的帳戶資料
     this.DataServiceProvider.get_account_data().subscribe(data => this.account_data_list = data);
                                  // data 丟到 messageList 去跟php要到資料! dataservice
                                  //messageList->account_data_list
   }
 
-  get_profile(){
+  get_profile() {  // 跟 dataservice 要 用戶的個人資料
     this.DataServiceProvider.get_profile().subscribe(data => this.profile_list = data);
   }
 
@@ -77,7 +79,7 @@ export class My_bonusPage {
     myContractInstance = MyContract.at(myContractAddress);	// initiate contract for an address
   }
 
-  client_eventWatch() {
+  client_eventGet() { // get event
 
     var event = myContractInstance.Exchange({},
       {
@@ -85,7 +87,6 @@ export class My_bonusPage {
         toBlock: 'latest'
       });
 
-    var id = 1;
     event.get(function (error, result) {
       if (!error) {
         console.log(result);

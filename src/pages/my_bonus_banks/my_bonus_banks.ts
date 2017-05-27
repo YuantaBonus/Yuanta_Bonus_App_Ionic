@@ -4,6 +4,7 @@ import { ActionSheetController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 
+// 全域變數
 declare var Web3: any;
 var web3;
 var myContractInstance;
@@ -30,9 +31,9 @@ export class My_bonus_banksPage {
               private alertCtrl: AlertController,
               private DataServiceProvider: DataServiceProvider) {
 
-    this.requireWeb3();
-    this.client_eventWatch();
-    this.event_update();
+    this.requireWeb3(); // 順序不能錯
+    this.client_eventGet();
+  // get event    this.event_update();
 
     this.nav_data = NavParams.data.item;
   }
@@ -42,12 +43,12 @@ export class My_bonus_banksPage {
     console.log("Selected bank", option);
   }
 
-  input_onChange(from_bank_value){
+  input_onChange(from_bank_value){  //輸入欄位變化時做的事情
     this.to_bank_value = this.from_bank_value*10;
     console.log(this.to_bank_value);
   }
 
-  presentConfirm() {
+  presentConfirm() {  //顯示確認送出訊息
     let alert = this.alertCtrl.create({
       title: '交易確認',
       message: '此項紅利交換是否確認送出?',
@@ -88,7 +89,7 @@ export class My_bonus_banksPage {
     myContractInstance = MyContract.at(myContractAddress);	// initiate contract for an address
   }
 
-  web3_sendTransaction(){
+  web3_sendTransaction(){ // 送出 交換點數 的 transaction
 
     var fromAddress = '0x13f42EcB9fBF94Ff33cD22828070F2FA10048a27';	//由哪個銀行送出元大幣，暫時寫死國泰
 		var from_Password = 'citi';
@@ -156,7 +157,7 @@ export class My_bonus_banksPage {
 		// 		}
 		// 	);
 
-    var update_data = {
+    var update_data = { //要送到資料庫更新的資料
       "from_bank_value": from_bank_value,
       "to_bank_value": to_bank_value,
       "fee": fee
@@ -165,11 +166,11 @@ export class My_bonus_banksPage {
     this.update_value(update_data);
   }
 
-  update_value(data) {
+  update_value(data) {  // call dataservice 來 更新資料庫
     this.DataServiceProvider.update_value(data);
   }
 
-  client_eventWatch() {
+  client_eventGet() { // get event
 
     var event = myContractInstance.Exchange({},
       {
@@ -177,7 +178,6 @@ export class My_bonus_banksPage {
         toBlock: 'latest'
       });
 
-    var id = 1;
     event.get(function (error, result) {
       if (!error) {
         console.log(result);
@@ -241,7 +241,7 @@ export class My_bonus_banksPage {
     }, 100);
   }
 
-  current_date(){
+  current_date(){ //獲得現在的日期
 	var date = new Date();
 			var yyyy = date.getFullYear();
 			var mm = date.getMonth()+1; //January is 0!
