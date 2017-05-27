@@ -17,10 +17,6 @@ export class NotificationPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad NotificationPage');
-  }
-
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 

@@ -53,7 +53,7 @@ export class SettingPage {
             event_result = result;
             event_check = true;
 				    for (var i = result.length-1; i >=0; i--) {
-				    	console.log(result[i].transactionHash);
+				    	// console.log(result[i].transactionHash);
               // console.log(result[i].args.account);
               // console.log(result[i].args.date);
               // console.log(result[i].args.fee.c[0]);
@@ -61,7 +61,6 @@ export class SettingPage {
               // console.log(result[i].args.from_bonus.c[0]);
               // console.log(result[i].args.to);
               // console.log(result[i].args.to_bonus.c[0]);
-              // console.log(result[i].args.value.c[0]);
 				    }
 				  }
       });
