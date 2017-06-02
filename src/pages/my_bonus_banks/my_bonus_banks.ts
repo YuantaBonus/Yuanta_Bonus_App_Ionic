@@ -32,8 +32,8 @@ export class My_bonus_banksPage {
               private DataServiceProvider: DataServiceProvider) {
 
     this.requireWeb3(); // 順序不能錯
-    this.client_eventGet();
-  // get event    this.event_update();
+    this.client_eventGet(); // get event
+    this.event_update();
 
     this.nav_data = NavParams.data.item;
   }

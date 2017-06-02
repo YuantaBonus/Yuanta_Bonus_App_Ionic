@@ -1,25 +1,55 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="_purple">
     <ion-title>
       {{ nav_data.bank }}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-card>
-    <p>我的資料</p>
     <ion-list>
+      <ion-list-header>
+         詳細資料
+      </ion-list-header>
       <!--傳過來的不是 陣列 只是一個object 不能用 ngfor-->
-      <p>{{ nav_data.account }}</p>
-      <p>{{ nav_data.name }}</p>
-      <p>{{ nav_data.regist_time }}</p>
-      <p>{{ nav_data.user_id }}</p>
-      <p>{{ nav_data.value }}</p>
-    </ion-list>
-  </ion-card>
+      <ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-3>帳戶號碼:</ion-col>
+            <ion-col col-7 offset-2>
+              {{ nav_data.account }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3>姓名:</ion-col>
+            <ion-col col-7 offset-2>
+              {{ nav_data.name }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3>註冊時間:</ion-col>
+            <ion-col col-7 offset-2>
+              {{ nav_data.regist_time }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3>身分證字號:</ion-col>
+            <ion-col col-7 offset-2>
+              {{ nav_data.user_id }}
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-3>剩餘點數:</ion-col>
+            <ion-col col-7 offset-2>
+              <ion-badge color="primary">{{ nav_data.value }}點</ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-  <ion-card>
+      </ion-item>
+    </ion-list>
+
     <ion-list>
       <ion-list-header>
         交換點數
@@ -42,21 +72,34 @@
         <ion-input color="dark" disabled="true" placeholder="尚未輸入數量" value="{{ to_bank_value }}"></ion-input>
       </ion-item>
 
-      <button ion-button round (click)='presentConfirm();'>交易送出</button>
+      <div text-center>
+        <button ion-button round (click)='presentConfirm();'>交易送出</button>
+      </div>
+
     </ion-list>
-  </ion-card>
 
-  <ion-card>
 
-      <ion-list-header>
-        交換紀錄
-      </ion-list-header>
+    <ion-list-header>
+      交換紀錄
+    </ion-list-header>
 
-      <ion-list *ngFor="let list of event_resultList">
-        <ion-item>
-          {{ list.args.from }}{{list.args.from_bonus.c[0] }} {{ list.args.to }}{{list.args.to_bonus.c[0] }}
-        </ion-item>
-      </ion-list>
+    <ion-list *ngFor="let list of event_resultList">
+
+      <ion-item>
+        <ion-icon name="icon-library" item-left></ion-icon>
+        <h2>
+            {{ list.args.from }}
+          <ion-icon name="arrow-round-forward"></ion-icon>
+            {{ list.args.to }}
+        </h2>
+        <p>
+            <ion-badge color="primary">{{list.args.from_bonus.c[0] }}點</ion-badge>
+          <ion-icon name="arrow-round-forward"></ion-icon>
+          <ion-badge color="secondary">{{list.args.to_bonus.c[0] }}點</ion-badge>
+        </p>
+      </ion-item>
+
+    </ion-list>
 
   </ion-card>
 
