@@ -57,8 +57,10 @@
       <ion-item>
         <ion-label color="primary">欲換取銀行</ion-label>
         <ion-select #select (ionChange)="option_onChange(select.value)" placeholder="請選擇">
-          <ion-option value="cathy">國泰銀行</ion-option>
-          <ion-option value="citi">花旗銀行</ion-option>
+          <div *ngFor="let option of select_option">
+            <ion-option *ngIf="nav_data.bank!=option.name" value={{option.value}}>{{option.name}}</ion-option>
+          </div>
+
         </ion-select>
       </ion-item>
 

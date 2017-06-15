@@ -19,9 +19,10 @@ var event_check = false;
 export class My_bonus_banksPage {
 
   nav_data;
+  select_option;
   select_to_banks: string;
   from_bank_value: number;
-  to_bank_value: number;
+  to_bank_value;
 
   event_resultList = [];
 
@@ -36,6 +37,12 @@ export class My_bonus_banksPage {
     this.event_update();
 
     this.nav_data = NavParams.data.item;
+
+    this.select_option = [
+      { value: "yuanta", name: "元大銀行" },
+      { value: "cathay", name: "國泰銀行" },
+      { value: "citi", name: "花旗銀行" }
+    ];
   }
 
   option_onChange(option){ // 選項變化時做的事情
@@ -43,8 +50,11 @@ export class My_bonus_banksPage {
     console.log("Selected bank", option);
   }
 
-  input_onChange(from_bank_value){  //輸入欄位變化時做的事情
-    this.to_bank_value = this.from_bank_value*10;
+  input_onChange(from_bank_value) {  //輸入欄位變化時做的事情
+    if (this.select_to_banks!=null)
+      this.to_bank_value = this.from_bank_value / 4;
+    else
+      this.to_bank_value = "尚未選取銀行";
     console.log(this.to_bank_value);
   }
 
@@ -133,29 +143,30 @@ export class My_bonus_banksPage {
 
     web3.personal.unlockAccount(fromAddress, from_Password, 300);	//解鎖要執行 function 的 account
 
-    // var res = myContractInstance.transfer(	// transfer 是 contract 裡 的一個 function
-		// 		from_bank_user_account,
-		// 		from_bank_value,
-		// 		to_bank_value,
-		// 		fee,
-		// 		date,
-		// 		to_bank_address,	//input
-		// 		value,	//input
-		// 		{
-		// 			from: fromAddress,	//從哪個ethereum帳戶執行
-		// 			'gas': myContractInstance.transfer.estimateGas(from_bank_user_account,from_bank_value,to_bank_value,fee,date,to_bank_address,value) //執行function所需的gas ((發現放input突然就可以了
-		// 		},
-		// 		function(err, result) {	//callback 的 function
-		// 			if (!err){
-		// 				console.log("Transaction_Hash: " + result);
-		// 				// bootbox.alert("交易成功!");	//瀏覽器 會 顯示 交易成功視窗
-		// 			}
-		// 			else {
-		// 				console.log(err);
-		// 				//alert(err);
-		// 			}
-		// 		}
-		// 	);
+    var res = myContractInstance.transfer(	// transfer 是 contract 裡 的一個 function
+				from_bank_user_account,
+				from_bank_value,
+				to_bank_value,
+				fee,
+				date,
+				to_bank_address,	//input
+				value,	//input
+				{
+					from: fromAddress,	//從哪個ethereum帳戶執行
+					// 'gas': myContractInstance.transfer.estimateGas(from_bank_user_account,from_bank_value,to_bank_value,fee,date,to_bank_address,value) //執行function所需的gas ((發現放input突然就可以了
+          'gas': 42000
+				},
+				function(err, result) {	//callback 的 function
+					if (!err){
+						console.log("Transaction_Hash: " + result);
+						// bootbox.alert("交易成功!");	//瀏覽器 會 顯示 交易成功視窗
+					}
+					else {
+						console.log(err);
+						//alert(err);
+					}
+				}
+			);
 
     var update_data = { //要送到資料庫更新的資料
       "from_bank_value": from_bank_value,
@@ -163,7 +174,7 @@ export class My_bonus_banksPage {
       "fee": fee
     };
 
-    this.update_value(update_data);
+    // this.update_value(update_data);
   }
 
   update_value(data) {  // call dataservice 來 更新資料庫
