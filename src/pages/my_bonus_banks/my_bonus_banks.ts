@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ActionSheetController } from 'ionic-angular';
+import { ActionSheetController, Events } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
+import { My_bonusPage } from '../my_bonus/my_bonus';
 
 // 全域變數
 declare var Web3: any;
@@ -30,7 +31,8 @@ export class My_bonus_banksPage {
               public NavParams: NavParams,
               public ActionSheetCtrl: ActionSheetController,
               private alertCtrl: AlertController,
-              private DataServiceProvider: DataServiceProvider) {
+              private DataServiceProvider: DataServiceProvider,
+              public events: Events,) {
 
     this.requireWeb3(); // 順序不能錯
     this.client_eventGet(); // get event
@@ -38,7 +40,7 @@ export class My_bonus_banksPage {
 
     this.nav_data = NavParams.data.item;
 
-    this.select_option = [
+    this.select_option = [  //銀行選項
       { value: "yuanta", name: "元大銀行" },
       { value: "cathay", name: "國泰銀行" },
       { value: "citi", name: "花旗銀行" }
@@ -126,11 +128,11 @@ export class My_bonus_banksPage {
 		var bank_citi_rate=200;
 		var bank_cathay_rate=50;
 
-		if (to_bank=="元大銀行") {
+		if (to_bank=="yuanta") {
 			to_bank_address = bank_yuanta_address;
-		}else if (to_bank=="花旗銀行") {
+		}else if (to_bank=="citi") {
 			to_bank_address = bank_citi_address;
-		}else if (to_bank=="國泰銀行") {
+		}else if (to_bank=="cathay") {
 			to_bank_address = bank_cathay_address;
 		}
 
@@ -143,6 +145,8 @@ export class My_bonus_banksPage {
 
     web3.personal.unlockAccount(fromAddress, from_Password, 300);	//解鎖要執行 function 的 account
 
+    //console.log(myContractInstance.transfer.estimateGas()); //執行function所需的gas ((發現放input突然就可以了
+
     var res = myContractInstance.transfer(	// transfer 是 contract 裡 的一個 function
 				from_bank_user_account,
 				from_bank_value,
@@ -153,28 +157,45 @@ export class My_bonus_banksPage {
 				value,	//input
 				{
 					from: fromAddress,	//從哪個ethereum帳戶執行
-					// 'gas': myContractInstance.transfer.estimateGas(from_bank_user_account,from_bank_value,to_bank_value,fee,date,to_bank_address,value) //執行function所需的gas ((發現放input突然就可以了
-          'gas': 42000
+					//'gas': myContractInstance.transfer.estimateGas(from_bank_user_account,from_bank_value,to_bank_value,fee,date,to_bank_address,value) //執行function所需的gas ((發現放input突然就可以了
+          'gas': 100000
 				},
 				function(err, result) {	//callback 的 function
 					if (!err){
 						console.log("Transaction_Hash: " + result);
-						// bootbox.alert("交易成功!");	//瀏覽器 會 顯示 交易成功視窗
 					}
 					else {
 						console.log(err);
-						//alert(err);
 					}
 				}
 			);
 
-    var update_data = { //要送到資料庫更新的資料
-      "from_bank_value": from_bank_value,
-      "to_bank_value": to_bank_value,
-      "fee": fee
-    };
+      var update_data = { //要送到資料庫更新的資料
+        "from_bank_value": from_bank_value,
+        "to_bank_value": to_bank_value,
+        "fee": fee
+      };
 
-    // this.update_value(update_data);
+      this.update_value(update_data);
+
+      let alert = this.alertCtrl.create({
+        title: '交易成功',
+        message: '回到銀行列表',
+        buttons: [
+          {
+            text: '確認',
+            handler: () => {
+              console.log('Submit clicked');
+
+              // this.navCtrl.push(My_bonusPage);
+              this.events.publish('finish_transfer');
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      alert.present();
+      
   }
 
   update_value(data) {  // call dataservice 來 更新資料庫
@@ -183,11 +204,14 @@ export class My_bonus_banksPage {
 
   client_eventGet() { // get event
 
-    var event = myContractInstance.Exchange({},
-      {
-        fromBlock: 8063,
-        toBlock: 'latest'
-      });
+    var event = myContractInstance.Exchange(
+				{
+					from: '0x13f42ecb9fbf94ff33cd22828070f2fa10048a27'
+				},
+				{
+					fromBlock: 24798,
+					toBlock: 'latest'
+				});
 
     event.get(function (error, result) {
       if (!error) {

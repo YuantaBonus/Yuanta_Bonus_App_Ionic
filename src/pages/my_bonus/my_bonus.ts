@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController  } from 'ionic-angular';
+import { NavController, LoadingController, Events  } from 'ionic-angular';
 import { My_bonus_banksPage } from '../my_bonus_banks/my_bonus_banks';
 import { DataServiceProvider } from '../../providers/data-service/data-service';
 
@@ -31,7 +31,10 @@ export class My_bonusPage {
 
   event_resultList = []; //js 讀不到 => 從 全域的 event_result 獲得資料 顯示在 html
 
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, private DataServiceProvider: DataServiceProvider) {
+  constructor(public navCtrl: NavController,
+              public loadingCtrl: LoadingController,
+              private DataServiceProvider: DataServiceProvider,
+              public events: Events) {
 
     this.presentLoading();
 
@@ -41,6 +44,22 @@ export class My_bonusPage {
     this.requireWeb3();
     this.client_eventGet();
     this.event_update();
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    this.get_account_data(); //在 constructer　裡　call 這個function 要資料><
+    this.get_profile(); //在 constructer　裡　call 這個function 要資料><
+
+    this.requireWeb3();
+    this.client_eventGet();
+    this.event_update();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 
   presentLoading() {  //顯示 loading 的 動畫
@@ -53,6 +72,17 @@ export class My_bonusPage {
 
   openNavDetailsPage(item) {  // 跳到選擇的銀行頁面 with 該銀行的data
     this.navCtrl.push(My_bonus_banksPage, { item: item });
+
+    this.events.subscribe('finish_transfer',() => {
+      this.presentLoading();
+
+      this.get_account_data(); //在 constructer　裡　call 這個function 要資料><
+      this.get_profile(); //在 constructer　裡　call 這個function 要資料><
+
+      this.requireWeb3();
+      this.client_eventGet();
+      this.event_update();
+    });
   }
 
 
@@ -83,7 +113,7 @@ export class My_bonusPage {
 
     var event = myContractInstance.Exchange({},
       {
-        fromBlock: 8063,
+        fromBlock: 24798,
         toBlock: 'latest'
       });
 
